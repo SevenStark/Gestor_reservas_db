@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis reservas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">🏨 Hotel Paradise</div>
+        <nav>
+            <a class="menu" href="{{ url_for('habitaciones') }}">habitaciones</a>
+            <a href="{{ url_for('reservas') }}">Mis reservas</a>
+        </nav>
+    </header>    
+
+    <div class="mis-reservas">
+        <h1>Mis reservas</h1>
+        <p>Gestiona tus reservas de habitaciones</p>
+
+        <div id="contenedorReservas">
+            {% for reserva in lista_reservas %}
+            <div class="reserva-card">
+                <div class="reserva-header">
+                    <div>
+                        <h2>{{ reserva[7] }}</h2> 
+                        <p class="codigo">Reserva #{{ 1000 + reserva[0] }}</p>
+                    </div>
+                    <span class="estado">Confirmada</span>
+                </div>
+
+                <div class="reserva-info">
+                    <div class="columna">
+                        <h4>INFORMACION DEL HUESPED</h4>
+                        <p>{{ reserva[1] }}</p> <p>{{ reserva[2] }}</p> <p>{{ reserva[3] }}</p> </div>                
+                    <div class="columna">
+                        <h4>INFORMACION DE RESERVA</h4>
+                        <p>{{ reserva[4] }} - {{ reserva[5] }}</p> <p>{{ reserva[6] }} huéspedes</p>
+                    </div>
+                </div>
+                <div class="acciones">
+                    <button class="btn-cancelar" onclick="abrirModal('{{ reserva[0] }}')">Cancelar reserva</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>               
+    </div>
+
+    <div id="modalCancelar" class="modal">
+        <div class="modal-contenido">
+            <h3>¿cancelar reserva?</h3>
+            <p>Esta acción no se puede deshacer. <br>
+               La reserva será eliminada de la base de datos.</p>
+
+            <div class="modal-botones">
+                <button class="no" onclick="cerrarModal()">No, mantener reserva</button>
+                <a id="btnConfirmarEliminar" href="#" class="si" style="text-decoration:none; color:white; display:flex; align-items:center; justify-content:center;">Si, cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

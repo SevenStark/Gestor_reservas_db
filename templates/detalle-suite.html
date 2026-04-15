@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suite Junior</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">🏨 Hotel Paradise</div>
+        <nav>
+            <a class="menu" href="{{ url_for('habitaciones') }}">habitaciones</a>
+            <a href="{{ url_for('reservas') }}">Mis reservas</a>
+        </nav>
+    </header>
+
+    <div class="contenedor">
+
+        <!-- para ubicar la imagen y texto la ventana -->
+        <div class="izquierda">
+            <img src="{{ url_for('static', filename='imagenes/suite.jpg') }}">
+
+            <div class="info">
+                <div class="titulo">
+                    <h2>Habitación Suite Junior</h2>
+                    <span class="precio">$1.000.000</span>
+                </div>
+
+                <div class="caracteristicas">
+                    <span>👥 3 personas</span>
+                    <span>50 m²</span>
+                </div>
+
+                <p class="descripcion">
+                    Suite de lujo con sala de estar separada y dormitorio privado.
+                </p>
+            </div>
+        </div>
+
+        <!-- formulario para confirmar datos de reserva -->
+        <div class="reserva">
+            <h3>Reservar Suite Junior</h3>
+
+            <form action="{{ url_for('confirmar_reserva') }}" method="POST">
+                <input type="hidden" name="habitacion" value="Habitación Suite Junior">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+
+                <label>Fecha de entrada</label>
+                <input type="date" id="entrada" name="entrada" required>
+
+                <label>Fecha de salida</label>
+                <input type="date" id="salida" name="salida" required>
+
+                <input type="number" id="huespedes" name="huespedes" placeholder="Número de huéspedes" required>
+
+                <button type="submit">Confirmar reserva</button>
+            </form>    
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>

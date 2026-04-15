@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estandar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">🏨 Hotel Paradise</div>
+            <nav>
+                <a class="menu" href="{{ url_for('habitaciones') }}">habitaciones</a>
+                <a href="{{ url_for('reservas') }}">Mis reservas</a>
+            </nav>
+    </header>
+
+    <div class="contenedor">
+
+        <div class="izquierda">
+            <img src="{{ url_for('static', filename='imagenes/estandar.jpg') }}">
+
+            <div class="info">
+                <div class="titulo">
+                    <h2>Habitación Estándar</h2>
+                    <span class="precio">$350.000</span>
+                </div>
+
+                <div class="caracteristicas">
+                    <span>👥 2 personas</span>
+                    <span>25 m²</span>
+                </div>
+
+                <p class="descripcion">
+                    Una cómoda habitación con todas las comodidades básicas para una estancia agradable.
+                    Perfecta para viajeros individuales o parejas.
+                </p>
+            </div>
+        </div>
+
+        <!-- DERECHA -->
+        <div class="reserva">
+            <h3>Reservar habitación estándar</h3>
+
+            <form action="{{ url_for('confirmar_reserva') }}" method="POST">
+                <input type="hidden" name="habitacion" value="Habitación Estándar">
+                <input type="number" id="id" name="id" placeholder="Identificacion sin puntos" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+
+                <label>Fecha de entrada</label>
+                <input type="date" id="entrada" name="entrada" required>
+
+                <label>Fecha de salida</label>
+                <input type="date" id="salida" name="salida" required>
+
+                <input type="number" id="huespedes" name="huespedes" placeholder="Número de huéspedes" required>
+
+                <button type="submit">Confirmar reserva</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
