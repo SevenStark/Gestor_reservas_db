@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>habitaciones</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+     <section class="habitaciones">
+
+        <h2>Nuestras habitaciones</h2>
+        <p>4 habitaciones disponibles</p>
+
+        <div class="contenedor-habitaciones">
+            <!--habitacion 1-->
+            <div class="card">
+                <div class="imagen">
+                    <img src="{{ url_for('static', filename='imagenes/estandar.jpg') }}">
+                    <span class="Disponible">Disponible</span>
+                </div>
+
+                <div class="info">
+                    <div class="titulo-precio">
+                        <h3>Habitación estándar</h3>
+                        <span class="precio">$350.000</span>
+                    </div>
+
+                    <p class="descripcion">
+                        Una cómoda habitación con todas las comodidades básicas
+                        para una estancia agradable. Perfecta para viajeros
+                    </p>
+
+                    <div class="caracteristicas">
+                        <span>2 personas</span>
+                        <span>25 m²</span>
+                    </div>
+
+                    <a href="{{ url_for('detalle_estandar') }}">
+                    <button>Ver detalle</button>
+                    </a>
+                </div>
+            </div>
+
+            <!--habitacion 2-->
+            <div class="card">
+                <div class="imagen">
+                    <img src="{{ url_for('static', filename='imagenes/deluxe.jpg') }}">
+                    <span class="Disponible">Disponible</span>
+                </div>
+
+                <div class="info">
+                    <div class="titulo-precio">
+                        <h3>Habitación Deluxe</h3>
+                        <span class="precio">$600.000</span>
+                    </div>
+
+                    <p class="descripcion">
+                        Espaciosa habitación con vista panorámica y 
+                        mobiliario de alta calidad.
+                    </p>
+
+                    <div class="caracteristicas">
+                        <span>2 personas</span>
+                        <span>35 m²</span>
+                    </div>
+
+                    <a href="{{ url_for('detalle_deluxe') }}">
+                    <button>Ver detalle</button>
+                    </a>
+                </div>
+            </div>
+
+            <!--habitacion 3-->
+            <div class="card">
+                <div class="imagen">
+                    <img src="{{ url_for('static', filename='imagenes/suite.jpg') }}">
+                    <span class="Disponible">Disponible</span>
+                </div>
+
+                <div class="info">
+                    <div class="titulo-precio">
+                        <h3>Suite Junior</h3>
+                        <span class="precio">$1.000.000</span>
+                    </div>
+
+                    <p class="descripcion">
+                        Suite de lujo con sala de estar separada y dormitorio privado.
+                    </p>
+
+                    <div class="caracteristicas">
+                        <span>3 personas</span>
+                        <span>50 m²</span>
+                    </div>
+
+                    <a href="{{ url_for('detalle_suite') }}">
+                    <button>Ver detalle</button>
+                    </a>
+                </div>
+            </div>
+
+            <!--habitacion 4-->
+
+            <div class="card">
+                <div class="imagen">
+                    <img src="{{ url_for('static', filename='imagenes/presidencial.jpg') }}">
+                    <span class="Disponible">Disponible</span>
+                </div>
+
+                <div class="info">
+                    <div class="titulo-precio">
+                        <h3>Suite Presidencial</h3>
+                        <span class="precio">$2.000.000</span>
+                    </div>
+
+                    <p class="descripcion">
+                        La experiencia lujosa con vista panoramica de 360 grados. 
+                        incluye dos dormitorios, comedor privado...
+                    </p>
+
+                    <div class="caracteristicas">
+                        <span>4 personas</span>
+                        <span>120 m²</span>
+                    </div>
+
+                    <a href="{{ url_for('detalle_presidencial') }}">
+                    <button>Ver detalle</button>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+</body>
+</html>
