@@ -57,7 +57,7 @@ def confirmar_reserva():
             
             cur.execute("""
                 INSERT INTO reservas (id, nombre, email, telefono, fecha_entrada, fecha_salida, huespedes, habitacion)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """, (id_cedula, nombre, email, telefono, f_entrada, f_salida, huespedes, habitacion))
             
             cur.execute("""
@@ -72,7 +72,7 @@ def confirmar_reserva():
             
             flash('Reserva confirmada')
 
-        except Exceptiona as e:    
+        except Exception as e:
             print(f"Error: {e}")
             mysql.connection.rollback()
         finally:
@@ -82,10 +82,19 @@ def confirmar_reserva():
 
 @app.route('/reservas')
 def reservas():
+
+    if 'usuario_id' not in session:
+
+        flash("Por favor inicia sesión para ver tus reservas")
+        return redirect(url_for('index')) 
+
+    cedula = session['usuario_id']
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM reservas')
+    cur.execute('SELECT * FROM reservas WHERE id = %s', [cedula])
+    
     mis_reservas = cur.fetchall()
     cur.close()
+
     return render_template('reservas.html', lista_reservas=mis_reservas)
 
 @app.route('/eliminar_reserva/<int:id>')
@@ -95,6 +104,26 @@ def eliminar_reserva(id):
     mysql.connection.commit()
     cur.close()
     return redirect(url_for('reservas'))
+
+
+@app.route('/login-huesped', methods=['POST'])
+def login_huesped():
+    email = request.form['email']
+    cedula = request.form['cedula'] # La usamos como password
+
+    cur = mysql.connection.cursor()
+    # Buscamos que coincida el email y la cédula en la tabla usuarios
+    cur.execute("SELECT id, email FROM usuarios WHERE email = %s AND id = %s", (email, cedula))
+    usuario = cur.fetchone()
+    cur.close()
+
+    if usuario:
+        session['usuario_id'] = usuario[0]
+        session['usuario_email'] = usuario[1]
+        return redirect(url_for('reservas'))
+    else:
+        flash("Datos incorrectos, verifica tu correo y cédula.")
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

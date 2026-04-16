@@ -14,7 +14,11 @@
         <div class="logo">🏨 Hotel Paradise</div>
         <nav>
             <a class="menu" href="{{ url_for('habitaciones') }}">habitaciones</a>
-            <a href="{{ url_for('reservas') }}">Mis reservas</a>
+            {% if session.get('usuario_id') %}
+                <a href="{{ url_for('reservas') }}">Mis reservas</a>
+            {% else %}
+                <a href="javascript:void(0)" onclick="abrirLogin()">Mis reservas</a>
+            {% endif %}
         </nav>
     </header>    
         
@@ -181,7 +185,40 @@
 
     </section>
 
-    
+
+<!---login emergente-->
+    <div id="modalLogin" class="modal">
+        <div class="modal-contenido login-card">
+            <span class="cerrar" onclick="cerrarLogin()">&times;</span>
+            <h2>Bienvenido</h2>
+            <p>Inicia sesión en tu cuenta</p>
+
+            <form action="{{ url_for('login_huesped') }}" method="POST">
+                <div class="input-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" name="email" placeholder="tu@ejemplo.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="cedula" placeholder="Tu número de cédula" required>
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
+    <script>function abrirLogin() {
+        document.getElementById('modalLogin').style.display = 'flex';
+        }
+        
+        function cerrarLogin() {
+            document.getElementById('modalLogin').style.display = 'none';
+        }
+
+</script>
+
+
 </body>
 <footer>
 
