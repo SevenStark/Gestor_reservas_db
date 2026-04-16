@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='imagenes/favicon.ico') }}"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suite Junior</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -10,7 +11,7 @@
 <body>
 
     <header>
-         <a id="idlogo" href="{{ url_for('index') }}"><div class="logo">Hotel Paradise</div></a><!--Agregue esto para que se devolviera a la pagina de inicio-->
+        <a id="idlogo" href="{{ url_for('index') }}"><div class="logo">Hotel Paradise</div></a><!--Agregue esto para que se devolviera a la pagina de inicio-->
     
         <nav>
             <a class="menu" href="{{ url_for('habitaciones') }}">habitaciones</a>

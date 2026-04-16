@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='imagenes/favicon.ico') }}"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>habitaciones</title>
+    <title>Habitaciones</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <header>
-         <a id="idlogo" href="{{ url_for('index') }}"><div class="logo">Hotel Paradise</div></a><!--Agregue esto para que se devolviera a la pagina de inicio-->
-       
+    <header>        
+        <a id="idlogo" href="{{ url_for('index') }}"><div class="logo">Hotel Paradise</div></a>
+        <nav>
+            {% if session.get('usuario_id') %}
+                <a href="{{ url_for('reservas') }}">Mis reservas</a>
+            {% else %}
+                <a href="javascript:void(0)" onclick="abrirLogin()">Mis reservas</a>
+            {% endif %}
+        </nav>
+    </header>
+
      <section class="habitaciones">
 
         <h2>Nuestras habitaciones</h2>
@@ -138,5 +147,44 @@
 
 
     </section>
+    <footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>Hotel Paradise</h3>
+            <p>Disfruta del mejor servicio y comodidad.</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Enlaces</h4>
+            <ul>
+                <li><a id="idlogo" href="{{ url_for('index') }}"><div class="logo">Inicio</div></a></li>
+                <li><a id="idlogo" href="{{ url_for('habitaciones') }}"><div class="logo">Habitaciones</div></a></li>
+                <li><a id="idlogo" href="{{ url_for('reservas') }}"><div class="logo">reservas</div></a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contacto</h4>
+            <p>
+                Email:
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@hotel.com" target="_blank">
+                        info@hotel.com
+                    </a>
+            </p>
+            <p>
+                Tel: 
+                    <a href="https://wa.me/573000000000" target="_blank">
+                        +57 300 000 0000
+                    </a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Hotel Paradise - Todos los derechos reservados</p>
+    </div>
+</footer>
 </body>
 </html>

@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" href="{{ url_for('static', filename='imagenes/favicon.png') }}"> <!--este el el icono que va en la parte de las pestaña -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Paradise</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> 
-
+    <link rel="icon" href="{{ url_for('static', filename='imagenes/favicon.ico') }}"> 
 </head>
 
 <body>
-    <header>
-        
-        <div id="google_translate_element" style="display:none;"></div><!--este boton se usa para incluir la api de google translate-->
+    <header>        
         <div class="logo">Hotel Paradise</div>
-        <nav>            
+        <nav>
+            <a class="menu" href="{{ url_for('habitaciones') }}">Habitaciones</a>
             {% if session.get('usuario_id') %}
                 <a href="{{ url_for('reservas') }}">Mis reservas</a>
             {% else %}
                 <a href="javascript:void(0)" onclick="abrirLogin()">Mis reservas</a>
-            {% endif %}            
+            {% endif %}
         </nav>
     </header>    
     <section class="inicio">        
