@@ -175,37 +175,7 @@
 
     </section>
     </section> <!--fin del section inicio-->
-<!---login emergente-->
-    <div id="modalLogin" class="modal">
-        <div class="modal-contenido login-card">
-            <span class="cerrar" onclick="cerrarLogin()">&times;</span>
-            <h2>Bienvenido</h2>
-            <p>Inicia sesión en tu cuenta</p>
-
-            <form action="{{ url_for('login_huesped') }}" method="POST">
-                <div class="input-group">
-                    <label>Correo electrónico</label>
-                    <input type="email" name="email" placeholder="tu@ejemplo.com" required>
-                </div>
-                
-                <div class="input-group">
-                    <label>Contraseña</label>
-                    <input type="password" name="cedula" placeholder="Tu número de cédula" required>
-                </div>
-
-                <button type="submit" class="btn-login">Iniciar sesión</button>
-            </form>
-        </div>
-    </div>
-    <script>function abrirLogin() {
-        document.getElementById('modalLogin').style.display = 'flex';
-        }
-        
-        function cerrarLogin() {
-            document.getElementById('modalLogin').style.display = 'none';
-        }
-
-</script>   
+   
 </body>
 <footer class="footer">
     <div class="footer-container">
@@ -236,6 +206,36 @@
         <p>&copy; 2026 Hotel Paradise - Todos los derechos reservados</p>
     </div>
 </footer>
+<!---login emergente-->
+    <div id="modalLogin" class="modal">
+        <div class="modal-contenido login-card">
+            <span class="cerrar" onclick="cerrarLogin()">&times;</span>
+            <h2>Bienvenido</h2>
+            <p>Inicia sesión en tu cuenta</p>
 
+            <form action="{{ url_for('login_huesped') }}" method="POST">
+                <div class="input-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" name="email" placeholder="tu@ejemplo.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="cedula" placeholder="Tu número de cédula" required>
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
+
+<script>function abrirLogin() {
+    document.getElementById('modalLogin').style.display = 'flex';
+        }
+        function cerrarLogin() {
+            document.getElementById('modalLogin').style.display = 'none';
+        }
+
+</script>
 
 </html>
