@@ -3,12 +3,12 @@ from flask_mysqldb import MySQL
 from functools import wraps
 import random
 
-# esto es un comentario de prueba
+# inicializa flask
 app = Flask(__name__)
 app.secret_key = '123456'
 
-# Configuración MySQL
-app.config['MYSQL_HOST'] = '127.0.0.1'
+# Configuración de la conexion a MySQL
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'gestor_reservas'
@@ -55,19 +55,22 @@ def confirmar_reserva():
         cur = mysql.connection.cursor()
 
         try:
-            
+            #Ingresa la informacion a la tabla "reservas"
             cur.execute("""
                 INSERT INTO reservas (id, nombre, email, telefono, fecha_entrada, fecha_salida, huespedes, habitacion)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """, (id_cedula, nombre, email, telefono, f_entrada, f_salida, huespedes, habitacion))
             
+
+            #a tabla usuarios
             cur.execute("""
                 INSERT IGNORE INTO usuarios (id, email, password) 
                 VALUES (%s, %s, %s)
             """, (id_cedula, email, id_cedula))
 
-            mysql.connection.commit()
+            mysql.connection.commit()#confirma los datos en la bd
 
+            #inicia la sesion automaticamente luego de que el usuario confirma la reserva
             session['usuario_id']=id_cedula
             session['usuario_email']=email
             
@@ -75,7 +78,7 @@ def confirmar_reserva():
 
         except Exception as e:
             print(f"Error: {e}")
-            mysql.connection.rollback()
+            mysql.connection.rollback()#cancela cambios en caso de error
         finally:
             cur.close()
 
@@ -88,12 +91,13 @@ def reservas():
 
         flash("Por favor inicia sesión para ver tus reservas")
         return redirect(url_for('index')) 
-
-    cedula = session['usuario_id']
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM reservas WHERE id = %s', [cedula])
     
-    mis_reservas = cur.fetchall()
+    # el usuario puede consultar unicamente su reserva
+    cedula = session['usuario_id']
+    cur = mysql.connection.cursor()#objeto con el que se puede ejecutar consultas en sql
+    cur.execute('SELECT * FROM reservas WHERE id = %s', [cedula])#consulta
+    
+    mis_reservas = cur.fetchall()#trae los resultados de la consulta
     cur.close()
 
     return render_template('reservas.html', lista_reservas=mis_reservas, numero = numero)
@@ -105,6 +109,7 @@ def eliminar_reserva(id):
     mysql.connection.commit()
     cur.close()
     return redirect(url_for('reservas'))
+
 
 
 @app.route('/login-huesped', methods=['POST'])
